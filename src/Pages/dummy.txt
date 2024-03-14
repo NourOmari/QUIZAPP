@@ -1,0 +1,286 @@
+// import React, { useState, useEffect } from "react";
+// import { MdOutlineQuiz } from "react-icons/md";
+// import { quiz } from "../Quiz/Question";
+// import { Link } from "react-router-dom";
+// import Review from "./Review"; // Import the Review component
+
+// function QuizPage() {
+//   const [currentQuestion, setCurrentQuestion] = useState(0);
+//   const [selectedAnswer, setSelectedAnswer] = useState("");
+//   const [quizCompleted, setQuizCompleted] = useState(false);
+//   const [userAnswers, setUserAnswers] = useState([]);
+
+//   const { questions } = quiz;
+//   const { question, choices, correctAnswer } = questions[currentQuestion];
+
+//   useEffect(() => {
+//     const storedAnswers = JSON.parse(localStorage.getItem("userAnswers")) || [];
+//     setUserAnswers(storedAnswers);
+//   }, []);
+
+//   const handleClickNext = () => {
+//     setSelectedAnswer(null);
+//     if (currentQuestion === questions.length - 1) {
+//       setQuizCompleted(true);
+//     } else {
+//       setCurrentQuestion((prev) => prev + 1);
+//     }
+//     setResult((prev) =>
+//       selectedAnswer
+//         ? {
+//             ...prev,
+//             score: prev.score + 5,
+//             correctAnswers: prev.correctAnswers + 1,
+//           }
+//         : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
+//     );
+//   };
+
+//   const handleAnswerSelected = (answer, index) => {
+//     setSelectedAnswer(index);
+//     setUserAnswers((prevAnswers) => {
+//       const updatedAnswers = [...prevAnswers];
+//       updatedAnswers[currentQuestion] = answer;
+//       localStorage.setItem("userAnswers", JSON.stringify(updatedAnswers));
+//       return updatedAnswers;
+//     });
+//   };
+
+//   return (
+//     <div>
+//       <header className="flex flex-row justify-center gap-4 items-center bg-cyan-600 py-4">
+//         <MdOutlineQuiz className="text-orange-500 font-bold text-xl" />
+//         <h1 className="text-xl font-bold text-white">Quiz Time</h1>
+//       </header>
+//       <main>
+//         <div className="quiz-container">
+//           {/* {!quizCompleted && ( */}
+//           <div className="flex justify-center text-orange-500 font-bold">
+//             <span className="active-question-no">
+//               {addLeadingZero(currentQuestion + 1)}
+//             </span>
+//             <span className="total-question">
+//               /{addLeadingZero(questions.length)}
+//             </span>
+//           </div>
+//           <h2 className="flex justify-center ml-4">{question}</h2>
+//           <div className="flex text-sky-600 justify-center cursor-pointer ">
+//             <ul>
+//               {choices.map((answer, index) => (
+//                 <li
+//                   onClick={() => handleAnswerSelected(answer, index)}
+//                   key={answer}
+//                   className={
+//                     selectedAnswer === index
+//                       ? selectedAnswer[currentQuestion] === correctAnswer
+//                         ? "selected-correct-answer"
+//                         : "selected-wrong-answer"
+//                       : null
+//                   }
+//                 >
+//                   {answer}
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+//           <div className="flex justify-center">
+//             <button
+//               onClick={handleClickNext}
+//               disabled={selectedAnswer === null}
+//               className="relative  px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-orange-50
+//                   before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-orange-500 before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 text-orange-500 hover:text-orange-50 font-bold"
+//             >
+//               {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+//             </button>
+//           </div>
+//           )}
+//         </div>
+
+//         {quizCompleted && (
+//           <div className="flex justify-center mt-20 text-center border rounded-xl bg-sky-200">
+//             <div className="result-container text-cyan-600 font-bold">
+//               <h2>Your Result</h2>
+//               <p className="text-orange-500 font-bold">Score: {result.score}</p>
+//               <p className="text-orange-500 font-bold">
+//                 Correct Answers: {result.correctAnswers}
+//               </p>
+//               <p className="text-orange-500 font-bold">
+//                 Wrong Answers: {result.wrongAnswers}
+//               </p>
+//             </div>
+//           </div>
+//         )}
+//         {quizCompleted && (
+//           <Review questions={questions} userAnswers={userAnswers} />
+//         )}
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default QuizPage;
+
+// import React, { useState } from "react";
+// import { MdOutlineQuiz } from "react-icons/md";
+// import { quiz } from "../Quiz/Question";
+// import { Link } from "react-router-dom";
+
+// function QuizPage({ selectedAnswers }) {
+//   const [currentQuestion, setCurrentQuestion] = useState(0);
+//   const [selectedAnswer, setSelectedAnswer] = useState("");
+//   //to store the selected answers from the user
+//   const [quizCompleted, setQuizCompleted] = useState(false);
+    //   const [result, setResult] = useState({
+    //     score: 0,
+    //     correctAnswers: 0,
+    //     wrongAnswers: 0,
+    //   });
+//   const { questions } = quiz;
+//   const { question, choices, correctAnswer } = questions[currentQuestion];
+//   const selectedAnswers = JSON.parse(localStorage.getItem("")) || [];
+//   const [answers, setAnswers] = useState(selectedAnswers);
+
+//   useEffect(() => {
+//     localStorage.setAnswers("answers", JSON.stringify(answers));
+//   }, [answers]);
+
+//   const handleClickNext = () => {
+//     setSelectedAnswer(null);
+//     if (currentQuestion === questions.length - 1) {
+//       setQuizCompleted(true);
+//     } else {
+//       setCurrentQuestion((prev) => prev + 1);
+//     }
+//     setResult((prev) =>
+//       selectedAnswer
+//         ? {
+//             ...prev,
+//             score: prev.score + 5,
+//             correctAnswers: prev.correctAnswers + 1,
+//           }
+//         : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
+//     );
+//   };
+
+//   const handleAnswerSelected = (answer, index) => {
+//     setSelectedAnswer(index);
+//     if (answer === correctAnswer) {
+//       setSelectedAnswer(true);
+//     } else {
+//       setSelectedAnswer(false);
+//     }
+//   };
+//   const handleReviewAnswers = (selectedAnswers) => {
+//     setAnswers(selectedAnswers);
+//   };
+//   // const handleAnswerSelected = (answer, index) => {
+//   //   setSelectedAnswer(index);
+//   //   const newSelectedAnswers = [...selectedAnswers];
+//   //   newSelectedAnswers[currentQuestion] = index;
+//   //   setSelectedAnswer(newSelectedAnswers);
+//   // };
+//   // const handleReviewAnswers = selectedAnswer
+//   //   ? selectedAnswers.(
+//   //       (answers) =>
+//   //         (selectedAnswer?.correctAnswer === "" && true) ||
+//   //         (selectedAnswer?.correctAnswer === "option2" && task.completed) ||
+//   //         (selectedAnswer?.correctAnswer === "option3" && !task.completed)
+//   //     )
+//   //   : answers;
+//   // const handleReviewAnswers = (selectedAnswers) => {
+//   //   setSelectedAnswer(selectedAnswers);
+//   // };
+//   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`);
+
+//   return (
+//     <div>
+//       <header className="flex flex-row justify-center gap-4 items-center bg-cyan-600 py-4">
+//         <MdOutlineQuiz className="text-orange-500 font-bold text-xl" />
+//         <h1 className="text-xl font-bold text-white">Quiz Time</h1>
+//       </header>
+//       <main>
+//         <div className="quiz-container">
+//           {!quizCompleted && (
+//             <>
+//               <div className="flex justify-center text-orange-500 font-bold">
+//                 <span className="active-question-no">
+//                   {addLeadingZero(currentQuestion + 1)}
+//                 </span>
+//                 <span className="total-question">
+//                   /{addLeadingZero(questions.length)}
+//                 </span>
+//               </div>
+//               <h2 className="flex justify-center ml-4">{question}</h2>
+//               <div className="flex text-sky-600 justify-center cursor-pointer ">
+//                 <ul>
+//                   {choices.map((answer, index) => (
+//                     <li
+//                       onClick={() => handleAnswerSelected(answer, index)}
+//                       key={answer}
+//                       className={
+//                         selectedAnswer === index
+//                           ? selectedAnswer[currentQuestion] === correctAnswer
+//                             ? "selected-correct-answer"
+//                             : "selected-wrong-answer"
+//                           : null
+//                       }
+//                     >
+//                       {answer}
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+
+//               <div className="flex justify-center">
+//                 <button
+//                   onClick={handleClickNext}
+//                   disabled={selectedAnswer === null}
+//                   className="relative  px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-orange-50
+//                   before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-orange-500 before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 text-orange-500 hover:text-orange-50 font-bold"
+//                 >
+//                   {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+//                 </button>
+//               </div>
+//             </>
+//           )}
+
+//           {quizCompleted && (
+//             <div className="flex justify-center mt-20 text-center border rounded-xl bg-sky-200">
+//               <div className="result-container text-cyan-600 font-bold">
+//                 <h2>Your Result</h2>
+//                 <p className="text-orange-500 font-bold">
+//                   Score: {result.score}
+//                 </p>
+//                 <p className="text-orange-500 font-bold">
+//                   Correct Answers: {result.correctAnswers}
+//                 </p>
+//                 <p className="text-orange-500 font-bold">
+//                   Wrong Answers: {result.wrongAnswers}
+//                 </p>
+//               </div>
+//             </div>
+//           )}
+//           {quizCompleted && (
+//             <div className="flex justify-center mt-7">
+//               <Link
+//                 to={{
+//                   pathname: "./Review",
+//                   state: {
+//                     userAnswers: selectedAnswer,
+//                     correctAnswers: questions.map((q) => q.correctAnswer),
+//                   },
+//                 }}
+//                 onClick={handlReviewAnswers}
+//                 className="relative px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-orange-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full before:bg-orange-500 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 text-orange-500 hover:text-orange-50 font-bold"
+//               >
+//                 Review Answer
+//               </Link>
+//             </div>
+//           )}
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default QuizPage;

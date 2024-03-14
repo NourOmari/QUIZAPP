@@ -1,0 +1,150 @@
+// import React from "react";
+// import { MdOutlineQuiz } from "react-icons/md";
+// import { Link } from "react-router-dom";
+
+// function Review({ handleReviewAnswers, answers, choices }) {
+//   return (
+//     <div>
+//       <header className="flex flex-row justify-center gap-4 items-center bg-cyan-600 py-4">
+//         <MdOutlineQuiz className="text-orange-500 font-bold text-xl" />
+//         <h1 className="text-xl font-bold text-white">Quiz Time</h1>
+//       </header>
+//       <main>
+//         <div className="review-container">
+//           <ul>
+//             {choices.map((answer, index) => (
+//               <li
+//                 onClick={() => handleReviewAnswers()}
+//                 key={answer}
+//                 className={
+//                   selectedAnswer === index
+//                     ? selectedAnswer[currentQuestion] === correctAnswer
+//                       ? "selected-correct-answer text-green-600"
+//                       : "selected-wrong-answer text-red-600"
+//                     : null
+//                 }
+//               >
+//                 {answers}
+//               </li>
+//             ))}
+//           </ul>
+
+//           <div className="flex justify-center mt-7">
+//             <Link
+//               to="/HomePage"
+//               className="relative px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-orange-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full before:bg-orange-500 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 text-orange-500 hover:text-orange-50 font-bold"
+//             >
+//               Back to Quiz
+//             </Link>
+//           </div>
+//           <div></div>
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default Review;
+
+// import React from "react";
+
+// function ReviewPage({ location }) {
+
+//   return (
+//     <div>
+//       <header className="flex flex-row justify-center gap-4 items-center bg-cyan-600 py-4">
+//         <h1 className="text-xl font-bold text-white">Review Answers</h1>
+//       </header>
+//       <main>
+
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default ReviewPage;
+
+// import React, { useState } from "react";
+// import { quiz } from "../Quiz/Question";
+// import { MdOutlineQuiz } from "react-icons/md";
+// import { Link } from "react-router-dom";
+
+// function Review() {
+//   const [userAnswers, setUserAnswers] = useState(
+//     Array(quiz.questions.length).fill(null)
+//   );
+
+//   const handleAnswerSelected = (questionIndex, answerIndex) => {
+//     setUserAnswers((prevAnswers) => {
+//       const newAnswers = [...prevAnswers];
+//       newAnswers[questionIndex] = answerIndex;
+//       return newAnswers;
+//     });
+//   };
+
+//   return (
+//     <div className="quiz-review">
+//       <header className="flex flex-row justify-center gap-4 items-center bg-cyan-600 py-4">
+//         <MdOutlineQuiz className="text-orange-500 font-bold text-xl" />
+//         <h1 className="text-xl font-bold text-white"> Quiz Review </h1>
+//       </header>
+//       <main>
+//         <div className="flex flex-col justify-center">
+//           {quiz.questions.map((question, questionIndex) => (
+//             <div key={questionIndex} className="question-container">
+//               <h3>{question.question}</h3>
+//               <ul>
+//                 {question.choices.map((choice, choiceIndex) => (
+//                   <li
+//                     key={choiceIndex}
+//                     className={
+//                       userAnswers[questionIndex] === choiceIndex
+//                         ? quiz.questions[questionIndex].correctAnswer === choice
+//                           ? "correct-answer"
+//                           : "wrong-answer"
+//                         : ""
+//                     }
+//                   >
+//                     <label>
+//                       <input
+//                         type="radio"
+//                         checked={userAnswers[questionIndex] === choiceIndex}
+//                         onChange={() =>
+//                           handleAnswerSelected(questionIndex, choiceIndex)
+//                         }
+//                       />
+//                       {choice}
+//                     </label>
+//                   </li>
+//                 ))}
+//               </ul>
+//               {userAnswers[questionIndex] !== null && (
+//                 <p
+//                   className={
+//                     quiz.questions[questionIndex].correctAnswer ===
+//                     question.choices[userAnswers[questionIndex]]
+//                       ? "correct-answer text-green-600"
+//                       : "wrong-answer text-red-600"
+//                   }
+//                 >
+//                   Your answer: {question.choices[userAnswers[questionIndex]]}
+//                 </p>
+//               )}
+//             </div>
+//           ))}
+//           <div className="flex justify-center">
+//             <Link
+//               to="/HomePage"
+//               className="relative px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-orange-50
+//         before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-orange-500 before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 text-orange-500 hover:text-orange-50 font-bold"
+//             >
+//               START OVER
+//             </Link>
+//           </div>
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default Review;
